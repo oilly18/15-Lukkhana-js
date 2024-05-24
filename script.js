@@ -28,204 +28,110 @@ function displayProductDashboard(load) {
   productDashboard.className = "bg-slate-200 flex";
   productDashboard.innerHTML = `
         <label>
-        <input type="checkbox" onclick="updateCart()" class="add-item items-center justify-items-center" id="checkbox" ="${load.id}">
+        <input type="checkbox" onclick="updateCart()" class="check-box add-item items-center justify-items-center" id="${load.id}">
         </label>
         <img src="${load.image}" class="w=1/3 h-40">
         <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">${load.productName}</p>
         <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">$${load.price}</p>
         `;
 
-  // productDashboard
-  //   .addEventListener("click", () => addToCart(load.id, true));
-  // productDashboard
-  //   .querySelector(".add-multiple")
-  //   .addEventListener("click", () => addToCart(load.id, true));
-
-  // productNameInput.appendChild(productDashboard);
-
   displayProduct.appendChild(productDashboard);
+  productDashboard.querySelector("input[type='checkbox']").addEventListener("change", () => updateCart(product));
 }
 
-const addToCartBtn = document.getElementById("add-to-cart");
-const checkBox = document.getElementById("checkbox");
-addToCartBtn.addEventListener("click",updateCart);
-checkBox.addEventListener("click",updateCart);
 
-function updateCart(load){
+const addToCartBtn = document.getElementById("add-to-cart");
+// const checkBox = document.querySelector(".checkbox");
+addToCartBtn.addEventListener("click",() => updateCart(productDashboard));
+// checkBox.addEventListener("click",() => updateCart(productDashboard));
+
+function updateCart(product){
   const cart = document.getElementById("cart");
   const productCart = document.createElement("div");
   productCart.className = "bg-slate-200 flex";
   productCart.innerHTML = `
-        <img src="${load.image}" class="w=1/3 h-40">
-        <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">${load.productName}</p>
-        <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">$${load.price}</p>
-        <button id="remove" class="bg-blue-500>Remove</button>
+        <img src="${product.image}" class="w=1/3 h-40">
+        <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">${product.productName}</p>
+        <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">$${product.price}</p>
+        <p></p>
+        <button id="remove" class="bg-blue-500">Calculate final price</button>
         `;
 
   cart.appendChild(productCart);
+  // updateCart(detailProduct);
      
 }
-// document.getElementById("add-to-cart").addEventListener("submit", function updateCart() {
-//     const addToCartBtn = document.getElementById("add-to-cart");
-  
-//     cart.innerHTML = "";
-//     cart.forEach((item) => {
-//       const addToCart = document.createElement("div");
-//       addToCart.innerHTML = `<img src="${load.image}" class="full">
-//         <p class="text-red-700 font-semibold text-2xl text-balance  my-4 p-4">${load.productName}</p>
-//         <p class="text-red-700 font-semibold text-2xl text-balance  my-4 p-4">${load.price}</p>
-//         `;
-//       cart.appendChild(addToCart);
-//     });
-  
-//     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-//     cart.innerHTML = `Total: $${total}`;
 
-
-//   });
-
-// function displayProductCart(updateCart) {
-//   const cart = document.getElementById("cart");
-//   const productCart = document.createElement("div");
-//   productCart.className = "bg-slate-200 flex";
-//   productCart.innerHTML = `
-//         <img src="${updateCart.image}" class="w=1/3 h-40">
-//         <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">${updateCart.productName}</p>
-//         <p class="text-pink-700 font-semibold text-2xl text-balance  my-4 p-4 flex-col">$${updateCart.price}</p>
-//         `;
-
-//   cart.appendChild(productCart);
-// }
-
-//  function to update the cart when new items and quantities are added
-// function updateCart() {
-//   cart.innerHTML = "";
-//   cart.forEach((item) => {
-//     const addToCart = document.createElement("div");
-//     addToCart.innerHTML = `<img src="${load.image}" class="full">
-//       <p class="text-red-700 font-semibold text-2xl text-balance  my-4 p-4">${load.productName}</p>
-//       <p class="text-red-700 font-semibold text-2xl text-balance  my-4 p-4">${load.price}</p>
-//       `;
-//     cart.appendChild(addToCart);
-//   });
-
-//   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-//   cart.innerHTML = `Total: $${total}`;
-// }
-
-// function to add product item to cart
-// function addToCart(productId, isMultiple) {
-//   const quantityInput = document.getElementById(`qty-${productId}`);
-//   const quantity = isMultiple ? parseInt(quantityInput.value) : 1;
-//   const product = products.find((p) => p.id === productId);
-//   const cart = cart.find((item) => item.id === product.id);
-//   if (cartItem) {
-//     cartItem.quantity += quantity;
-//   } else {
-//     cart.push({ ...product, quantity: quantity });
-//   }
-//   updateCart();
-// }
-
-// function to clear cart items
-function clearCart() {
-  cart.length = 0;
-  updateCart();
-}
 
 function imgUrl(imageInput) {
   const input = new URL(imageInput);
-  return /\.(jpg|jpeg|png)$/.test(input.pathname);
+  return /\.(jpg|jpeg|png|gif)$/.test(input.pathname);
 }
 
-// let uploads = [];
-// let idCounter = 0;
-// let totalLikes = 0;
 
-// document.getElementById("form").addEventListener("submit", function (event) {
-// 	event.preventDefault();
 
-// 	const imageURL = document.getElementById("imageURL").value;
-// 	const imageCaption = document.getElementById("imageCaption").value;
-// 	const errorMessage = document.getElementById("errorMessage");
 
-// 	// validation
-// 	if (!isImgUrl(imageURL)) {
-// 		errorMessage.textContent = "Please enter a valid image URL.";
-// 		return;
-// 	}
 
-// 	if (imageCaption.length < 3 || imageCaption > 255) {
-// 		errorMessage.textContent =
-// 			"Please describe your image (at least 3 characters, and not over 255 characters).";
-// 		return;
-// 	}
 
-// 	// create new upload object
-// 	const newUpload = {
-// 		id: idCounter++,
-// 		imageURL: imageURL,
-// 		caption: imageCaption,
-// 		likes: false,
-// 	};
 
-// 	uploads.push(newUpload);
 
-// 	displayUpload(newUpload);
 
-// 	errorMessage.textContent = "";
 
-// 	document.getElementById("form").reset();
-// });
 
-// document
-// 	.querySelector('button[type="reset"]')
-// 	.addEventListener("click", function () {
-// 		const errorMessage = document.getElementById("errorMessage");
-// 		errorMessage.textContent = "";
-// 	});
 
-// function displayUpload(upload) {
-// 	const displaySection = document.getElementById("displaySection");
-// 	const card = document.createElement("div");
-// 	card.className = "bg-white p-4 rounded-lg shadow-lg";
 
-// 	card.innerHTML = `
-// 		<img src="${upload.imageURL}" alt="${upload.caption}" class="w-full aspect-[4/3] rounded-md mb-4 object-cover">
-//     <p class="text-gray-700 font-semibold text-2xl text-balance overflow-hidden my-4 p-4">${upload.caption}</p>
-//     <label class="inline-flex items-center mt-2 text-2xl px-4">
-//       <input type="checkbox" class="w-8 h-8 text-2xl accent-rose-600" data-id="${upload.id}" onchange="toggleLike(event)">
-//       <span class="ml-2 text-gray-700 font-semibold">Love this 😍!</span>
-//     </label>
-//   `;
 
-// 	displaySection.appendChild(card);
-// 	updateLikeCounter();
-// }
 
-// function toggleLike(event) {
-// 	const checkbox = event.target;
-// 	const uploadId = parseInt(checkbox.getAttribute("data-id"));
-// 	const upload = uploads.find((upload) => upload.id === uploadId);
 
-// 	if (upload) {
-// 		upload.likes = checkbox.checked;
-// 		updateLikeCounter();
-// 	}
-// }
 
-// function updateLikeCounter() {
-// 	totalLikes = uploads.filter((upload) => upload.likes).length;
-// 	document.getElementById(
-// 		"likeCounter"
-// 	).textContent = `Total Likes: ${totalLikes}`;
-// }
 
-// // Validating image URLs using RegEx
-// function isImgUrl(imageURL) {
-// 	const input = new URL(imageURL);
-// 	return /\.(jpg|jpeg)$/.test(input.pathname);
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // / using the DOMContentLoaded event to ensure
 // // the script runs after the DOM is fully loaded
