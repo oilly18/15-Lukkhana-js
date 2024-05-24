@@ -11,16 +11,16 @@
     <h2 class="text-xl font-bold">Add item for selection</h2>
     <form id="form" class="flex justify-center items-center m-8">
       <div>
-        <label class="p-4">Produce Name :</label>
-        <input type="text" id="product-name" class="border-2 border-zinc-300" />
+        <label for="product-name"  class="p-4">Produce Name :</label>
+        <input required type="text" id="product-name" class="border-2 border-zinc-300" />
       </div>
       <div>
-        <label class="p-4">Price :</label>
-        <input type="number" id="price" class="border-2 border-zinc-300" />
+        <label for="price" class="p-4">Price :</label>
+        <input required type="number" id="price" class="border-2 border-zinc-300" />
       </div>
       <div>
-        <label class="p-4">Image :</label>
-        <input type="url" id="image" class="border-2 border-zinc-300" />
+        <label for="image" class="p-4">Image :</label>
+        <input required type="url" id="image" class="border-2 border-zinc-300" />
       </div>
       <div>
         <button
@@ -44,7 +44,12 @@
           Add to cart
         </button>
       </div>
-      <div id="cart"></div>
+      <ul>
+        <li ></li>
+      </ul>
+      <div id="cart">
+        <ul></ul>
+      </div>
       <p></p>
     </section>
     <script src="script.js"></script>
